@@ -17,11 +17,12 @@ I'm going to use a pandas data set for dealing with the data at runtime - info '
 <a href="https://covidwastewater.ahc.umn.edu/jmp_files/ww_region_untransformed_ORF.csv">regional data</a>
 
 """
-
+#import os
 import pandas as pd
 import matplotlib.pyplot as plt
 import requests
 
+dir_name = "E:\\wastewater_to_ftp\\" # output directory for files to be sent to the website 
 
 ## pull the data from the U of M 
 url = "https://covidwastewater.ahc.umn.edu/jmp_files/ww_region_untransformed_ORF.csv"
@@ -68,7 +69,9 @@ for location in locations:
     #plt.show()
     plotname=location.strip() + ".png"
     #print(plotname)
-    plt.savefig(plotname, format='png', dpi=92) # save the plot out to the directory
+    # need to save things to a specific directory for deployment 
+   
+    plt.savefig(dir_name + plotname, format='png', dpi=92) # save the plot out to the directory
 
 
 ## past this save for later in the case that I have to clean the data and build the dataframe from the cleaned data
@@ -177,7 +180,7 @@ html_content = """
 """
 
 # Specify the file name and path where you want to save the HTML file
-file_path = "generated_watewater_page.html"
+file_path = dir_name + "generated_watewater_page.html"
 
 # Open the file for writing and write the HTML content
 with open(file_path, "w") as html_file:
