@@ -33,9 +33,6 @@ name="ww_region_untransformed_ORF.csv"
  
 wasteData = pd.read_csv(name)
 
-#print (len(wasteData))
-#print(wasteData.shape)
-#print(wasteData.info())
 
 # get columns 
 column_names = list(wasteData.columns.values)
