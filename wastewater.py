@@ -17,7 +17,8 @@ I'm going to use a pandas data set for dealing with the data at runtime - info '
 <a href="https://covidwastewater.ahc.umn.edu/jmp_files/ww_region_untransformed_ORF.csv">regional data</a>
 
 """
-#import os
+import os
+import datetime
 import pandas as pd
 import matplotlib.pyplot as plt
 import requests
@@ -70,7 +71,10 @@ for location in locations:
     plotname=location.strip() + ".png"
     #print(plotname)
     # need to save things to a specific directory for deployment 
-   
+    # need to remove file before saving new fig
+    print(dir_name + plotname)
+    if os.path.isfile(dir_name + plotname):
+       os.remove(dir_name + plotname)
     plt.savefig(dir_name + plotname, format='png', dpi=92) # save the plot out to the directory
 
 
@@ -147,7 +151,10 @@ html_content = """
 </head>
 <body>
     <header>
-        <h1>Minnesota COVID Wastewater Testing Data</h1>
+        <h1>Minnesota COVID Wastewater Testing Data """ 
+current_datetime=datetime.datetime.now()
+html_content = html_content + current_datetime.strftime("%m/%d/%Y")    
+html_content = html_content + """</h1>
     </header>
     <div class="container">
         <div class="image">
